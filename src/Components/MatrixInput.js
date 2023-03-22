@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-function MatrixInput({size, setSize}) {
+function MatrixInput({size, setSize, matrix, setMatrix}) {
     //const [size, setSize] = useState(2) // начальный размер матрицы 
-    const [matrix, setMatrix] = useState(
-        Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
-    )
+    // const [matrix, setMatrix] = useState(
+    //     Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
+    // )
 
     const handleMatrixInputChange = (event, row, col) => {
         const value = event.target.value
