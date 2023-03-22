@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function MatrixInput(arr) {
+function MatrixInput() {
     const [size, setSize] = useState(2) // начальный размер матрицы 
     const [matrix, setMatrix] = useState(
         Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
@@ -9,11 +9,7 @@ function MatrixInput(arr) {
     const handleMatrixInputChange = (event, row, col) => {
         const value = event.target.value
         const newMatrix = [...matrix]
-        if (row == col) { matrix[row][col] = 1 }
-        else {
-            matrix[row][col] = Number(value)
-            matrix[col][row] = 1/value
-        }
+        newMatrix[row][col] = value
         setMatrix(newMatrix)
     }
 

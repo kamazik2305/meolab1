@@ -5,8 +5,6 @@ function App() {
 
   const [size, setSize] = useState(3)
 
-
-
   return (
     <div id="main">
       <p>Введите размер матрицы</p>
