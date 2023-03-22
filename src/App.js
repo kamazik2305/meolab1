@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Matrix from './Components/Matrix';
+import MatrixInput from './Components/MatrixInput';
+import { StartMatrix } from './Components/StartMatrix';
 
 function App() {
+
+  const [size, setSize] = useState(0)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="main">
+      <p>Введите размер матрицы</p>
+      <input id="rows" type="number" placeholder="Введите количество строк" value={size}
+        onChange={(e) => setSize(e.target.value)} />
+      <MatrixInput/>
     </div>
   );
 }
