@@ -8,9 +8,9 @@ function App() {
   return (
     <div id="main">
       <p>Введите размер матрицы</p>
-      <input id="rows" type="number" placeholder="Введите количество строк" value={size}
-        onChange={(e) => setSize(e.target.value)} />
-      <MatrixInput/>
+      {/* <input id="rows" type="number" placeholder="Введите количество строк" value={size}
+        onChange={(e) => setSize(e.target.value)} /> */}
+      <MatrixInput size={size} setSize={setSize}/>
     </div>
   );
 }

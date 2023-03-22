@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-function MatrixInput() {
-    const [size, setSize] = useState(2) // начальный размер матрицы 
+function MatrixInput({size, setSize}) {
+    //const [size, setSize] = useState(2) // начальный размер матрицы 
     const [matrix, setMatrix] = useState(
         Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
     )
