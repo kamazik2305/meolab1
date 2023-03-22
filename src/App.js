@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import Matrix from './Components/Matrix';
 import MatrixInput from './Components/MatrixInput';
-import { StartMatrix } from './Components/StartMatrix';
 
 function App() {
 
-  const [size, setSize] = useState(0)
+  const [size, setSize] = useState(3)
+
+
 
   return (
     <div id="main">

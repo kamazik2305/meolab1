@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 
-function MatrixInput() {
-    const [rows, setRows] = useState(2) // начальное количество строк матрицы 
-    const [cols, setCols] = useState(2) // начальное количество столбцов матрицы 
+function MatrixInput(arr) {
+    const [size, setSize] = useState(2) // начальный размер матрицы 
     const [matrix, setMatrix] = useState(
-        Array.from({ length: rows }, () => Array.from({ length: cols }, () => ''))
+        Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
     )
-    const handleInputChange = (event, row, col) => {
+
+    const handleMatrixInputChange = (event, row, col) => {
         const value = event.target.value
         const newMatrix = [...matrix]
-        newMatrix[row][col] = value
+        if (row == col) { matrix[row][col] = 1 }
+        else {
+            matrix[row][col] = Number(value)
+            matrix[col][row] = 1/value
+        }
         setMatrix(newMatrix)
     }
 
@@ -20,15 +24,15 @@ function MatrixInput() {
 
     const renderMatrixInputs = () => {
         const matrixInputs = []
-        for (let i = 0; i < rows; i++) {
+        for (let i = 0; i < size; i++) {
             const rowInputs = []
-            for (let j = 0; j < cols; j++) {
+            for (let j = 0; j < size; j++) {
                 rowInputs.push(
                     <input
                         key={`${i}-${j}`}
                         type="number"
                         value={matrix[i][j]}
-                        onChange={(event) => handleInputChange(event, i, j)}
+                        onChange={(event) => handleMatrixInputChange(event, i, j)}
                     />
                 )
             }
@@ -37,22 +41,12 @@ function MatrixInput() {
         return matrixInputs
     }
 
-    const handleRowsChange = (event) => {
+    const handleSizeChange = (event) => {
         const value = event.target.value
-        setRows(value)
+        setSize(value)
         setMatrix(
             Array.from({ length: value }, () =>
-                Array.from({ length: cols }, () => '')
-            )
-        )
-    }
-
-    const handleColsChange = (event) => {
-        const value = event.target.value
-        setCols(value)
-        setMatrix(
-            Array.from({ length: rows }, () =>
-                Array.from({ length: value }, () => '')
+                Array.from({ length: size }, () => '')
             )
         )
     }
@@ -61,11 +55,7 @@ function MatrixInput() {
         <form onSubmit={handleSubmit}>
             <label>
                 Rows:
-                <input type="number" value={rows} onChange={handleRowsChange} />
-            </label>
-            <label>
-                Columns:
-                <input type="number" value={cols} onChange={handleColsChange} />
+                <input type="number" value={size} onChange={handleSizeChange} />
             </label>
             {renderMatrixInputs()}
             <button type="submit">Submit</button>
