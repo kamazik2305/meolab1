@@ -9,7 +9,14 @@ function MatrixInput(arr) {
     const handleMatrixInputChange = (event, row, col) => {
         const value = event.target.value
         const newMatrix = [...matrix]
-        newMatrix[row][col] = value
+        if(row==col)
+        {
+            matrix[row][col] = 1
+        }
+        else{
+            matrix[row][col] = Number(value)
+            matrix[col][row] = 1/value
+        }
         setMatrix(newMatrix)
     }
 
