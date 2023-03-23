@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function MatrixInput({size, setSize, matrix, setMatrix}) {
+function MatrixInput({ size, setSize, matrix, setMatrix }) {
     //const [size, setSize] = useState(2) // начальный размер матрицы 
     // const [matrix, setMatrix] = useState(
     //     Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
@@ -12,7 +13,7 @@ function MatrixInput({size, setSize, matrix, setMatrix}) {
         if (row == col) { matrix[row][col] = 1 }
         else {
             matrix[row][col] = Number(value)
-            matrix[col][row] = 1/value
+            matrix[col][row] = 1 / value
         }
         setMatrix(newMatrix)
     }
@@ -52,14 +53,16 @@ function MatrixInput({size, setSize, matrix, setMatrix}) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Rows:
+        <div id='main'>
+            <form onSubmit={handleSubmit}>
+                <p>Введите размер матрицы</p>
                 <input type="number" value={size} onChange={handleSizeChange} />
-            </label>
-            {renderMatrixInputs()}
-            <button type="submit">Submit</button>
-        </form>
+                {renderMatrixInputs()}
+                {/* <button type="submit">Submit</button> */}
+                <Link to='result'>Расчитать</Link>
+            </form>
+        </div>
+
     )
 }
 

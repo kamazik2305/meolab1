@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import InterimResult from './Components/InterimResult';
 import MatrixInput from './Components/MatrixInput';
 
@@ -10,11 +11,13 @@ function App() {
   )
 
   return (
-    <div id="main">
-      <p>Введите размер матрицы</p>
-      <MatrixInput size={size} setSize={setSize} matrix={matrix} setMatrix={setMatrix} />
-      <InterimResult size={size} matrix={matrix}/>
-    </div>
+
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<MatrixInput size={size} setSize={setSize} matrix={matrix} setMatrix={setMatrix} />} />
+      <Route path='result' element={<InterimResult size={size} matrix={matrix}/>}/>
+    </Routes>
+    </BrowserRouter>
   );
 }
 
