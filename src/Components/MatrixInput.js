@@ -36,7 +36,7 @@ function MatrixInput({ size, setSize, matrix, setMatrix }) {
                         onChange={(event) => handleMatrixInputChange(event, i, j)}
                     />
                 )
-                
+
             }
             matrixInputs.push(<div key={i}>{rowInputs}</div>)
         }

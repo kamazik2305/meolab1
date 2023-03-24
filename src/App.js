@@ -5,7 +5,7 @@ import MatrixInput from './Components/MatrixInput';
 
 function App() {
 
-  const [size, setSize] = useState(5)
+  const [size, setSize] = useState(3)
   const [matrix, setMatrix] = useState(
     Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
   )

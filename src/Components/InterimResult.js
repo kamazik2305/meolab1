@@ -50,41 +50,78 @@ function InterimResult({ size, matrix }) {
         return arrayOfPi
     }
 
-    const getStartValues = () => {
-        const resultArray = []
-        const currentMatrix = matrix
-        resultArray.push(writeMatrix(matrix))
-
-        const sumStrings = calculateSumStrings(matrix)
+    const pushValues = (values, resultArray, message) => {
         resultArray.push(
             <div>
-                <a> Суммы строк матрицы: </a>
-                {sumStrings.map(sum => (
-                    <a key={sum}> {`${sum};  `} </a>
+                <a> {message} </a>
+                {values.map(value => (
+                    <a key={value}> {`${value};  `} </a>
                 ))}
             </div>
         )
+    }
+
+    const getStartValues = () => {
+        const resultArray = []
+        resultArray.push(writeMatrix(matrix))
+
+        const sumStrings = calculateSumStrings(matrix)
+        pushValues(sumStrings, resultArray, "Суммы строк матрицы:")
         resultArray.push(
             <p> {`Общая сумма строк: ${calculateGeneralSum(sumStrings)}`} </p>
         )
         const arrayOfPi = calculateNumberPi(sumStrings, calculateGeneralSum(sumStrings))
-        resultArray.push(
-            <div>
-                <a> Число ПИ: </a>
-                {arrayOfPi.map(pi => (
-                    <a key={pi}> {`${pi};  `} </a>
-                ))}
-            </div>
-        )
+        pushValues(arrayOfPi, resultArray, "Число ПИ:")
+
         return resultArray
     }
 
 
+    function multiplyMatrix(mtr) {
+        let currentMatrix = [];
+        for (let i = 0; i < size; i++) currentMatrix[i] = [];
+        for (let k = 0; k < size; k++) {
+            for (let i = 0; i < size; i++) {
+                let t = 0;
+                for (let j = 0; j < size; j++) t += mtr[i][j] * mtr[j][k];
+                currentMatrix[i][k] = t;
+            }
+        }
+        return currentMatrix;
+    }
+
+    const getIteration = (mtr) => {
+        const resultArray = []
+        const arrayOfPiPrevous = calculateNumberPi(calculateSumStrings(mtr), calculateGeneralSum(calculateSumStrings(mtr)))
+
+        const currentMatrix = multiplyMatrix(mtr)
+        resultArray.push(writeMatrix(currentMatrix))
+
+        const sumStrings = calculateSumStrings(currentMatrix)
+        pushValues(sumStrings, resultArray, "Суммы строк матрицы: ")
+        resultArray.push(
+            <p> {`Общая сумма строк: ${calculateGeneralSum(sumStrings)}`} </p>
+        )
+        const arrayOfPiNext = calculateNumberPi(sumStrings, calculateGeneralSum(sumStrings))
+        pushValues(arrayOfPiNext, resultArray, "Число ПИ: ")
+
+        const difPi = []
+        for (let i = 0; i < size; i++) {
+            difPi[i] = arrayOfPiNext[i] - arrayOfPiPrevous[i]
+        }
+        pushValues(difPi, resultArray, "Разница ПИ: ")
+
+        return resultArray
+
+    }
+
+    
 
     return (
         <div>
             <p>Начальная матрица</p>
-            {getStartValues(matrix)}
+            {getStartValues()}
+            {getIteration(matrix)}
             <button>check</button>
         </div>
     )
