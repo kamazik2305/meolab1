@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<InputPage size={size} setSize={setSize} matrix={matrix} setMatrix={setMatrix}
           things={things} setThings={setThings} accuracy={accuracy} setAccuracy={setAccuracy} />} />
-        <Route path='result' element={<ResultPage size={size} matrix={matrix} accuracy={accuracy} />} />
+        <Route path='result' element={<ResultPage size={size} matrix={matrix} accuracy={accuracy} things={things} />} />
       </Routes>
     </BrowserRouter>
   );

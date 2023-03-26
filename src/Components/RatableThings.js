@@ -35,11 +35,7 @@ function RatableThings({ size, things, setThings }) {
 
     return (
         <form onSubmit={handleSubmit}>
-
-            <p>Введите объекты для сравнения</p>
             {renderArrayInputs()}
-            <button type="submit">sub</button>
-
         </form>
 
     )

@@ -1,7 +1,7 @@
 import InterimResult from "../Components/InterimResult"
 
-export const ResultPage = ({ size, matrix, accuracy }) => {
+export const ResultPage = ({ size, matrix, accuracy, things }) => {
     return (
-        <InterimResult size={size} matrix={matrix} accuracy={accuracy} />
+        <InterimResult size={size} matrix={matrix} accuracy={accuracy} things={things} />
     )
 }

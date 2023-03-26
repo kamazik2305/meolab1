@@ -2,12 +2,32 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import "./style.css"
 
-function InterimResult({ size, matrix, accuracy }) {
+function InterimResult({ size, matrix, accuracy, things }) {
 
 
     let ok
 
+    const writeThingArray = () => {
+        const resultArray = []
+        const thingArray = []
+        for (let i = 0; i < size; i++) {
+            thingArray.push(
+                <input
+                    value={things[i]}
+                    className='inputThingCell'
+                    key={`${i}`}
+                    type="number"
+                    placeholder={things[i]}
+                    readOnly='readonly'
+                />
+            )
+        }
+        resultArray.push(<form className="thingform"> {thingArray} </form>)
+        return resultArray
+    }
+
     const writeMatrix = (mtr) => {
+        const resultArray = []
         const currentMatrix = []
         for (let i = 0; i < size; i++) {
             const rowInputs = []
@@ -24,7 +44,8 @@ function InterimResult({ size, matrix, accuracy }) {
             }
             currentMatrix.push(<div key={i}>{rowInputs}</div>)
         }
-        return currentMatrix
+        resultArray.push(<div> {currentMatrix} </div>)
+        return resultArray
     }
 
     const calculateSumStrings = (mtr) => {
@@ -67,7 +88,12 @@ function InterimResult({ size, matrix, accuracy }) {
 
     const getStartValues = () => {
         const resultArray = []
-        resultArray.push(writeMatrix(matrix))
+        resultArray.push(
+            <div className="tables">
+                {writeThingArray()}
+                {writeMatrix(matrix)}
+            </div>
+        )
 
         const sumStrings = calculateSumStrings(matrix)
         pushValues(sumStrings, resultArray, "Суммы строк матрицы:")
@@ -94,12 +120,21 @@ function InterimResult({ size, matrix, accuracy }) {
         return currentMatrix;
     }
 
+    function sortArray(param) {
+        return (a, b) => a[param] < b[param] ? 1 : -1;
+    }
+
     const getIteration = (mtr, index) => {
         const resultArray = []
         const arrayOfPiPrevous = calculateNumberPi(calculateSumStrings(mtr), calculateGeneralSum(calculateSumStrings(mtr)))
 
         const currentMatrix = multiplyMatrix(mtr)
-        resultArray.push(writeMatrix(currentMatrix))
+        resultArray.push(
+            <div className="tables">
+                {writeThingArray()}
+                {writeMatrix(currentMatrix)}
+            </div>
+        )
 
         const sumStrings = calculateSumStrings(currentMatrix)
         pushValues(sumStrings, resultArray, "Суммы строк матрицы: ")
@@ -115,12 +150,6 @@ function InterimResult({ size, matrix, accuracy }) {
         }
         pushValues(difPi, resultArray, "Разница ПИ: ")
 
-        // for (let i = 0; i < size; i++) {
-        //     if (difPi[i] > Number(accuracy)) {
-        //         ok = false
-        //         console.log(`${difPi[i]} > ${accuracy}`)
-        //     }
-        // }
         ok = false
         let i = 0
         while (!(ok) && i < size) {
@@ -132,6 +161,22 @@ function InterimResult({ size, matrix, accuracy }) {
         }
 
         ok ? resultArray.push(<p> {`Итерация ${index}:`} </p>) : resultArray.push(<a>Конец</a>)
+
+        if (!(ok)) {
+            let thingPiArray = []
+            for (let i = 0; i < size; i++) {
+                thingPiArray[i] = { pi: arrayOfPiNext[i], thing: things[i] }
+            }
+            thingPiArray = thingPiArray.sort(sortArray('pi'))
+            resultArray.push(
+                <div>
+                    <a> значения вектора по убыванию </a>
+                    {thingPiArray.map(value => (
+                        <p key={value}> {`${value.pi} ::::: ${value.thing}; `} </p>
+                    ))}
+                </div>
+            )
+        }
 
         return resultArray
 
@@ -150,10 +195,6 @@ function InterimResult({ size, matrix, accuracy }) {
             resultArray.push(getIteration(currentMatrix, index))
             index++
         }
-
-
-
-
         return resultArray
     }
 
