@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import "./style.css"
 
-function InterimResult({ size, matrix }) {
+function InterimResult({ size, matrix, accuracy }) {
+
+
+    let ok
 
     const writeMatrix = (mtr) => {
         const currentMatrix = []
@@ -90,7 +93,7 @@ function InterimResult({ size, matrix }) {
         return currentMatrix;
     }
 
-    const getIteration = (mtr) => {
+    const getIteration = (mtr, index) => {
         const resultArray = []
         const arrayOfPiPrevous = calculateNumberPi(calculateSumStrings(mtr), calculateGeneralSum(calculateSumStrings(mtr)))
 
@@ -111,18 +114,53 @@ function InterimResult({ size, matrix }) {
         }
         pushValues(difPi, resultArray, "Разница ПИ: ")
 
+        // for (let i = 0; i < size; i++) {
+        //     if (difPi[i] > Number(accuracy)) {
+        //         ok = false
+        //         console.log(`${difPi[i]} > ${accuracy}`)
+        //     }
+        // }
+        ok = false
+        let i = 0
+        while (!(ok) && i < size) {
+            if ((difPi[i] > Number(accuracy)) || (difPi[i] < -1 * Number(accuracy))) {
+                ok = true
+                console.log(`${difPi[i]} > ${accuracy}`)
+            }
+            i++
+        }
+
+        ok ? resultArray.push(<p> {`Итерация ${index}:`} </p>) : resultArray.push(<a>Конец</a>)
+
         return resultArray
 
     }
 
-    
+    const calculateResult = () => {
+        const resultArray = []
+        let currentMatrix = matrix
+        let index = 2
+        resultArray.push(getStartValues())
+        resultArray.push(<p>Итерация 1:</p>)
+        resultArray.push(getIteration(currentMatrix, index))
+        currentMatrix = multiplyMatrix(currentMatrix)
+        while (ok) {
+            currentMatrix = multiplyMatrix(currentMatrix)
+            resultArray.push(getIteration(currentMatrix, index))
+            index++
+        }
+
+
+
+
+        return resultArray
+    }
 
     return (
         <div>
+            <p>{`Точность измерений: ${accuracy}`}</p>
             <p>Начальная матрица</p>
-            {getStartValues()}
-            {getIteration(matrix)}
-            <button>check</button>
+            {calculateResult()}
         </div>
     )
 }
