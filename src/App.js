@@ -3,6 +3,8 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import InterimResult from './Components/InterimResult';
 import MatrixInput from './Components/MatrixInput';
 import RatableThings from './Components/RatableThings';
+import { InputPage } from './Pages/InputPage';
+import { ResultPage } from './Pages/ResultPage';
 
 function App() {
 
@@ -15,35 +17,14 @@ function App() {
     Array.from({ length: size }, () => '')
   )
 
-  const handleSizeChange = (event) => {
-    const value = event.target.value
-    setSize(value)
-    setMatrix(
-      Array.from({ length: value }, () =>
-        Array.from({ length: size }, () => '')
-      )
-    )
-    setThings(
-      Array.from({ length: value }, () => '')
-    )
-  }
-
 
   return (
 
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<div>
-          <p>Введите количество объектов для сравнения</p>
-          <input type="number" value={size} onChange={handleSizeChange} />
-          <RatableThings size={size} things={things} setThings={setThings} />
-          <MatrixInput size={size} setSize={setSize} matrix={matrix} setMatrix={setMatrix}
-            setThings={setThings} accuracy={accuracy} setAccuracy={setAccuracy} />
-          <p>Задайте точность измерений</p>
-          <input type="number" value={accuracy} onChange={(e) => { setAccuracy(e.target.value) }} />
-          <Link to='result' >Расчитать</Link>
-        </div>} />
-        <Route path='result' element={<InterimResult size={size} matrix={matrix} accuracy={accuracy} />} />
+        <Route path='/' element={<InputPage size={size} setSize={setSize} matrix={matrix} setMatrix={setMatrix}
+          things={things} setThings={setThings} accuracy={accuracy} setAccuracy={setAccuracy} />} />
+        <Route path='result' element={<ResultPage size={size} matrix={matrix} accuracy={accuracy} />} />
       </Routes>
     </BrowserRouter>
   );
