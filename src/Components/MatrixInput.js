@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import "./style.css"
 
-function MatrixInput({ size, setSize, matrix, setMatrix, accuracy, setAccuracy }) {
+function MatrixInput({ size, setSize, matrix, setMatrix, setThings, accuracy, setAccuracy }) {
     //const [size, setSize] = useState(2) // начальный размер матрицы 
     // const [matrix, setMatrix] = useState(
     //     Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
@@ -30,6 +31,7 @@ function MatrixInput({ size, setSize, matrix, setMatrix, accuracy, setAccuracy }
             for (let j = 0; j < size; j++) {
                 rowInputs.push(
                     <input
+                        className='inputMatrixCell'
                         key={`${i}-${j}`}
                         type="number"
                         value={matrix[i][j]}
@@ -43,34 +45,20 @@ function MatrixInput({ size, setSize, matrix, setMatrix, accuracy, setAccuracy }
         return matrixInputs
     }
 
-    const handleSizeChange = (event) => {
-        const value = event.target.value
-        setSize(value)
-        setMatrix(
-            Array.from({ length: value }, () =>
-                Array.from({ length: size }, () => '')
-            )
-        )
-    }
+    
 
     function checkMatrix(e)
     {
 
-        
+
         // e.preventDefault()
         // alert('Иди нахуй еблан')
     }
 
     return (
         <div id='main'>
-            <form onSubmit={handleSubmit}>
-            <p>Задайте точность измерений</p>
-                <input type="number" value={accuracy} onChange={(e) => {setAccuracy(e.target.value)}} />
-                <p>Введите размер матрицы</p>
-                <input type="number" value={size} onChange={handleSizeChange} />              
+            <form onSubmit={handleSubmit}>            
                 {renderMatrixInputs()}
-                <button type='submit'>sub</button>
-                <Link to='result' onClick={(e) => checkMatrix(e)} >Расчитать</Link>
             </form>
         </div>
 

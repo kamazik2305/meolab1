@@ -1,3 +1,11 @@
 ::placeholder{
     color: black;
 }
+
+.inputMatrixCell{
+    width: 75px;
+}
+
+.inputThingCell{
+    width: 200px;
+}

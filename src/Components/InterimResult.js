@@ -14,6 +14,7 @@ function InterimResult({ size, matrix, accuracy }) {
             for (let j = 0; j < size; j++) {
                 rowInputs.push(
                     <input
+                        className='inputMatrixCell'
                         key={`${i}-${j}`}
                         type="number"
                         placeholder={mtr[i][j]}
