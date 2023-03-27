@@ -15,7 +15,7 @@ function RatableThings({ size, things, setThings }) {
                     <input
                         className='inputThingCell'
                         placeholder={`#${i+1}`}
-                        key={`${i}`}
+                        key={`thing #${i}`}
                         type="text"
                         value={things[i]}
                         onChange={(event) => handleArrayInputChange(event, i)}

@@ -165,7 +165,7 @@ function InterimResult({ size, matrix, accuracy, things }) {
         if (!(ok)) {
             let thingPiArray = []
             for (let i = 0; i < size; i++) {
-                thingPiArray[i] = { pi: arrayOfPiNext[i], thing: things[i] }
+                thingPiArray[i] = { pi: difPi[i], thing: things[i] }
             }
             thingPiArray = thingPiArray.sort(sortArray('pi'))
             resultArray.push(
