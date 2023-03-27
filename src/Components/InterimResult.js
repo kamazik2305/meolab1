@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Button } from "react-bootstrap";
 import "./style.css"
 
 function InterimResult({ size, matrix, accuracy, things }) {

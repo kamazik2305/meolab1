@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import InterimResult from './Components/InterimResult';
-import MatrixInput from './Components/MatrixInput';
-import RatableThings from './Components/RatableThings';
 import { InputPage } from './Pages/InputPage';
 import { ResultPage } from './Pages/ResultPage';
 

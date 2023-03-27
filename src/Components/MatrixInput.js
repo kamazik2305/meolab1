@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import "./style.css"
 
-function MatrixInput({ size, setSize, matrix, setMatrix, setThings, accuracy, setAccuracy }) {
-    //const [size, setSize] = useState(2) // начальный размер матрицы 
-    // const [matrix, setMatrix] = useState(
-    //     Array.from({ length: size }, () => Array.from({ length: size }, () => ''))
-    // )
+function MatrixInput({ size, matrix, setMatrix }) {
 
     const handleMatrixInputChange = (event, row, col) => {
         const value = event.target.value
@@ -44,10 +39,9 @@ function MatrixInput({ size, setSize, matrix, setMatrix, setThings, accuracy, se
         return matrixInputs
     }
 
-    
 
-    function checkMatrix(e)
-    {
+
+    function checkMatrix(e) {
 
 
         // e.preventDefault()
@@ -56,7 +50,7 @@ function MatrixInput({ size, setSize, matrix, setMatrix, setThings, accuracy, se
 
     return (
         <div id='main'>
-            <form onSubmit={handleSubmit}>            
+            <form onSubmit={handleSubmit}>
                 {renderMatrixInputs()}
             </form>
         </div>

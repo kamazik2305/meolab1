@@ -47,11 +47,10 @@ export const InputPage = ({ size, setSize, matrix, setMatrix, things, setThings,
         <div>
             <p>Введите количество объектов для сравнения</p>
             <input type="number" value={size} onChange={handleSizeChange} />
-            <p>Введите объекты для сравнения и их оценки (оценки от 2 до 10 или от 1/2 до 1/9) </p>
+            <p>Введите объекты для сравнения и их оценки (оценки от 2 до 10 или от 1/2 до 1/10) </p>
             <div className="tables">
                 <RatableThings size={size} things={things} setThings={setThings} />
-                <MatrixInput size={size} setSize={setSize} matrix={matrix} setMatrix={setMatrix}
-                    setThings={setThings} accuracy={accuracy} setAccuracy={setAccuracy} />
+                <MatrixInput size={size} matrix={matrix} setMatrix={setMatrix} />
             </div>
 
             <p>Задайте точность измерений</p>

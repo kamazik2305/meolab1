@@ -14,7 +14,7 @@ function RatableThings({ size, things, setThings }) {
                 <div>
                     <input
                         className='inputThingCell'
-                        placeholder={`#${i+1}`}
+                        placeholder={`#${i + 1}`}
                         key={`thing #${i}`}
                         type="text"
                         value={things[i]}

@@ -1,20 +1,20 @@
-::placeholder{
+::placeholder {
     color: black;
 }
 
-.inputMatrixCell{
+.inputMatrixCell {
     width: 75px;
 }
 
-.inputThingCell{
+.inputThingCell {
     width: 200px;
     background-color: rgb(199, 199, 199);
 }
 
-.tables{
+.tables {
     display: flex;
 }
 
-.thingform{
+.thingform {
     display: grid;
 }

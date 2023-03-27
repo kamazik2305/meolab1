@@ -22,16 +22,15 @@ export const ResultPage = ({ size, matrix, accuracy, things }) => {
         return ok
     }
 
-    if(checkParams())
-    {
+    if (checkParams()) {
         return (
             <InterimResult size={size} matrix={matrix} accuracy={accuracy} things={things} />
         )
     }
-    else{
-        return(
+    else {
+        return (
             <div>Не все значения заполнены или заполнены неправильно</div>
         )
     }
-    
+
 }
