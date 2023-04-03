@@ -39,15 +39,6 @@ function MatrixInput({ size, matrix, setMatrix }) {
         return matrixInputs
     }
 
-
-
-    function checkMatrix(e) {
-
-
-        // e.preventDefault()
-        // alert('Иди нахуй еблан')
-    }
-
     return (
         <div id='main'>
             <form onSubmit={handleSubmit}>

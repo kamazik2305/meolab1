@@ -174,7 +174,7 @@ function InterimResult({ size, matrix, accuracy, things }) {
             thingPiArray = thingPiArray.sort(sortArray('pi'))
             resultArray.push(
                 <div>
-                    <a> значения вектора ПИ по убыванию: </a>
+                    <a> Значения вектора ПИ по убыванию: </a>
                     {thingPiArray.map(value => (
                         <p key={value}> {`${value.thing} - ${value.pi}; `} </p>
                     ))}
@@ -191,7 +191,8 @@ function InterimResult({ size, matrix, accuracy, things }) {
         let currentMatrix = matrix
         let index = 2
         resultArray.push(getStartValues())
-        resultArray.push(<p>Итерация 1:</p>)
+        resultArray.push(<p>Итерация {index}:</p>)
+        index++
         resultArray.push(getIteration(currentMatrix, index))
         currentMatrix = multiplyMatrix(currentMatrix)
         while (ok) {
