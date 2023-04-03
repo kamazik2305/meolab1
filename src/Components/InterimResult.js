@@ -74,14 +74,20 @@ function InterimResult({ size, matrix, accuracy, things }) {
     }
 
     const pushValues = (values, resultArray, message) => {
+        const currentArray = []
+        for(let i =0; i<size; i++)
+        {
+            currentArray.push(
+                <a> {`${things[i]}: ${values[i]};   `} </a>
+            )
+        }
         resultArray.push(
             <div>
                 <a> {message} </a>
-                {values.map(value => (
-                    <a key={value}> {`${value};  `} </a>
-                ))}
+                {currentArray}
             </div>
         )
+        
     }
 
     const getStartValues = () => {
@@ -163,14 +169,14 @@ function InterimResult({ size, matrix, accuracy, things }) {
         if (!(ok)) {
             let thingPiArray = []
             for (let i = 0; i < size; i++) {
-                thingPiArray[i] = { pi: difPi[i], thing: things[i] }
+                thingPiArray[i] = { thing: things[i], pi: arrayOfPiNext[i] }
             }
             thingPiArray = thingPiArray.sort(sortArray('pi'))
             resultArray.push(
                 <div>
-                    <a> значения вектора по убыванию </a>
+                    <a> значения вектора ПИ по убыванию: </a>
                     {thingPiArray.map(value => (
-                        <p key={value}> {`${value.pi} ::::: ${value.thing}; `} </p>
+                        <p key={value}> {`${value.thing} - ${value.pi}; `} </p>
                     ))}
                 </div>
             )
